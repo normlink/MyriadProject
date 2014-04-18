@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		61A4AF7B18FF13E100E7CBF3 /* Quest.m in Sources */ = {isa = PBXBuildFile; fileRef = 61A4AF7A18FF13E100E7CBF3 /* Quest.m */; };
+		61A4AF7E18FF165C00E7CBF3 /* QuestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 61A4AF7D18FF165C00E7CBF3 /* QuestViewController.m */; };
+		61A4AF8118FF16A600E7CBF3 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 61A4AF8018FF16A600E7CBF3 /* DetailViewController.m */; };
 		61FBA59118FB315300011EC7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61FBA59018FB315300011EC7 /* Foundation.framework */; };
 		61FBA59318FB315300011EC7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61FBA59218FB315300011EC7 /* CoreGraphics.framework */; };
 		61FBA59518FB315300011EC7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61FBA59418FB315300011EC7 /* UIKit.framework */; };
@@ -34,6 +37,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		61A4AF7918FF13E100E7CBF3 /* Quest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Quest.h; sourceTree = "<group>"; };
+		61A4AF7A18FF13E100E7CBF3 /* Quest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Quest.m; sourceTree = "<group>"; };
+		61A4AF7C18FF165C00E7CBF3 /* QuestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestViewController.h; sourceTree = "<group>"; };
+		61A4AF7D18FF165C00E7CBF3 /* QuestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestViewController.m; sourceTree = "<group>"; };
+		61A4AF7F18FF16A600E7CBF3 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
+		61A4AF8018FF16A600E7CBF3 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		61FBA58D18FB315300011EC7 /* MyriadChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyriadChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		61FBA59018FB315300011EC7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		61FBA59218FB315300011EC7 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -117,6 +126,12 @@
 				61FBA5A218FB315300011EC7 /* Main.storyboard */,
 				61FBA5A518FB315300011EC7 /* ViewController.h */,
 				61FBA5A618FB315300011EC7 /* ViewController.m */,
+				61A4AF7C18FF165C00E7CBF3 /* QuestViewController.h */,
+				61A4AF7D18FF165C00E7CBF3 /* QuestViewController.m */,
+				61A4AF7F18FF16A600E7CBF3 /* DetailViewController.h */,
+				61A4AF8018FF16A600E7CBF3 /* DetailViewController.m */,
+				61A4AF7918FF13E100E7CBF3 /* Quest.h */,
+				61A4AF7A18FF13E100E7CBF3 /* Quest.m */,
 				61FBA5A818FB315300011EC7 /* Images.xcassets */,
 				61FBA59718FB315300011EC7 /* Supporting Files */,
 			);
@@ -249,9 +264,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				61A4AF7B18FF13E100E7CBF3 /* Quest.m in Sources */,
 				61FBA5A718FB315300011EC7 /* ViewController.m in Sources */,
 				61FBA5A118FB315300011EC7 /* AppDelegate.m in Sources */,
 				61FBA59D18FB315300011EC7 /* main.m in Sources */,
+				61A4AF7E18FF165C00E7CBF3 /* QuestViewController.m in Sources */,
+				61A4AF8118FF16A600E7CBF3 /* DetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -456,6 +474,7 @@
 				61FBA5C118FB315300011EC7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		61FBA5C218FB315300011EC7 /* Build configuration list for PBXNativeTarget "MyriadChallengeTests" */ = {
 			isa = XCConfigurationList;
@@ -464,6 +483,7 @@
 				61FBA5C418FB315300011EC7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
