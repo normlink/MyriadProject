@@ -30,6 +30,14 @@
     textUsername.delegate = self;
     textPassword.delegate = self;
     
+    UITapGestureRecognizer *tapDismiss = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapDismissKeyboard:)];
+    [self.view addGestureRecognizer:tapDismiss];
+    
+}
+
+-(void)tapDismissKeyboard:(UITapGestureRecognizer *)sender{
+    [textUsername resignFirstResponder];
+    [textPassword resignFirstResponder];
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
