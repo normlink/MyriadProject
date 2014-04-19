@@ -10,6 +10,7 @@
 		61A4AF7B18FF13E100E7CBF3 /* Quest.m in Sources */ = {isa = PBXBuildFile; fileRef = 61A4AF7A18FF13E100E7CBF3 /* Quest.m */; };
 		61A4AF7E18FF165C00E7CBF3 /* QuestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 61A4AF7D18FF165C00E7CBF3 /* QuestViewController.m */; };
 		61A4AF8118FF16A600E7CBF3 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 61A4AF8018FF16A600E7CBF3 /* DetailViewController.m */; };
+		61A4AF8419021F6400E7CBF3 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 61A4AF8319021F6400E7CBF3 /* SettingsViewController.m */; };
 		61FBA59118FB315300011EC7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61FBA59018FB315300011EC7 /* Foundation.framework */; };
 		61FBA59318FB315300011EC7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61FBA59218FB315300011EC7 /* CoreGraphics.framework */; };
 		61FBA59518FB315300011EC7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61FBA59418FB315300011EC7 /* UIKit.framework */; };
@@ -43,6 +44,8 @@
 		61A4AF7D18FF165C00E7CBF3 /* QuestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestViewController.m; sourceTree = "<group>"; };
 		61A4AF7F18FF16A600E7CBF3 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		61A4AF8018FF16A600E7CBF3 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		61A4AF8219021F6400E7CBF3 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		61A4AF8319021F6400E7CBF3 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		61FBA58D18FB315300011EC7 /* MyriadChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyriadChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		61FBA59018FB315300011EC7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		61FBA59218FB315300011EC7 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -130,6 +133,8 @@
 				61A4AF7D18FF165C00E7CBF3 /* QuestViewController.m */,
 				61A4AF7F18FF16A600E7CBF3 /* DetailViewController.h */,
 				61A4AF8018FF16A600E7CBF3 /* DetailViewController.m */,
+				61A4AF8219021F6400E7CBF3 /* SettingsViewController.h */,
+				61A4AF8319021F6400E7CBF3 /* SettingsViewController.m */,
 				61A4AF7918FF13E100E7CBF3 /* Quest.h */,
 				61A4AF7A18FF13E100E7CBF3 /* Quest.m */,
 				61FBA5A818FB315300011EC7 /* Images.xcassets */,
@@ -270,6 +275,7 @@
 				61FBA59D18FB315300011EC7 /* main.m in Sources */,
 				61A4AF7E18FF165C00E7CBF3 /* QuestViewController.m in Sources */,
 				61A4AF8118FF16A600E7CBF3 /* DetailViewController.m in Sources */,
+				61A4AF8419021F6400E7CBF3 /* SettingsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

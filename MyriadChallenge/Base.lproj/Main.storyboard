@@ -32,19 +32,19 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="username" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bxA-G0-env">
-                                <rect key="frame" x="66" y="202" width="188" height="30"/>
+                                <rect key="frame" x="44" y="192" width="233" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VV0-da-fOH">
-                                <rect key="frame" x="66" y="240" width="188" height="30"/>
+                                <rect key="frame" x="44" y="227" width="233" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pHs-KP-XJ1">
-                                <rect key="frame" x="120" y="292" width="80" height="30"/>
+                                <rect key="frame" x="120" y="313" width="80" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Log In!">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -66,12 +66,24 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CxI-nZ-g7A">
+                                <rect key="frame" x="228" y="273" width="51" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </switch>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Remember Username" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dqQ-kp-3eD">
+                                <rect key="frame" x="58" y="278" width="157" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="0.70196080207824707" green="0.70196080207824707" blue="0.70196080207824707" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Welcome" id="mx8-W8-5xW"/>
                     <connections>
                         <outlet property="labelError" destination="S2I-gv-31b" id="sCo-Il-OVd"/>
+                        <outlet property="rememberSwitch" destination="CxI-nZ-g7A" id="GEE-bt-rZk"/>
                         <outlet property="textPassword" destination="VV0-da-fOH" id="X7x-PY-O5T"/>
                         <outlet property="textUsername" destination="bxA-G0-env" id="gAb-Lg-Y3H"/>
                         <segue destination="vqY-bR-8A3" kind="push" identifier="toQuestVC" id="o8i-RG-LuH"/>
@@ -106,14 +118,71 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Quests" id="Ouh-sM-BAJ"/>
+                    <navigationItem key="navigationItem" title="Quests" id="Ouh-sM-BAJ">
+                        <barButtonItem key="rightBarButtonItem" title="Settings" id="nbE-7P-Gbi">
+                            <connections>
+                                <action selector="getSettings:" destination="vqY-bR-8A3" id="PGP-I5-wX6"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="myQuestTableView" destination="IVC-AR-aZr" id="hTi-jW-JkN"/>
                         <segue destination="Lec-2p-NTt" kind="push" identifier="toDetailVC" id="JPg-JL-vFO"/>
+                        <segue destination="uwN-Iy-ppX" kind="push" identifier="toSettingsVC" id="j1z-Hy-0uv"/>
                     </connections>
                 </viewController>
             </objects>
             <point key="canvasLocation" x="2063" y="427"/>
+        </scene>
+        <!--Settings View Controller - Settings-->
+        <scene sceneID="nNZ-3E-yte">
+            <objects>
+                <viewController id="uwN-Iy-ppX" customClass="SettingsViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="jt6-Fy-A8O"/>
+                        <viewControllerLayoutGuide type="bottom" id="Vwy-nL-bFE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="fdW-qB-f1N">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="5Ng-p4-NUf">
+                                <rect key="frame" x="20" y="141" width="280" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <segments>
+                                    <segment title="Good"/>
+                                    <segment title="Neutral"/>
+                                    <segment title="Evil"/>
+                                </segments>
+                                <connections>
+                                    <action selector="alignmentSelection:" destination="uwN-Iy-ppX" eventType="valueChanged" id="Avz-lK-Xc9"/>
+                                </connections>
+                            </segmentedControl>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="j43-xC-2Rc">
+                                <rect key="frame" x="20" y="88" width="280" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vts-hT-77Z">
+                                <rect key="frame" x="89" y="192" width="143" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="Update Location">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Settings" id="0YV-jq-wal"/>
+                    <connections>
+                        <outlet property="segmentController" destination="5Ng-p4-NUf" id="POA-fJ-Ppc"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Khr-uf-HnT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2561" y="17"/>
         </scene>
         <!--Detail View Controller - Detail-->
         <scene sceneID="pfC-iS-sSn">
@@ -207,7 +276,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4nw-uv-XBe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2567" y="434"/>
+            <point key="canvasLocation" x="2561" y="676"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

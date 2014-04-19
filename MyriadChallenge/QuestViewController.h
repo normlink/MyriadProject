@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SettingsViewController.h"
 
-@interface QuestViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface QuestViewController : UIViewController <UITableViewDataSource, UITableViewDelegate,SettingsDelegate>
 
 @end

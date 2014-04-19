@@ -18,19 +18,28 @@
     Quest * specialDelivery;
     Quest * filthyMongrel;
     NSMutableArray * questArray;
+    NSMutableArray * tableviewArray;
     int tableRow;
+    int alignmentVar;
 }
+- (IBAction)getSettings:(id)sender;
 
 @end
 
 @implementation QuestViewController
 
 
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    if (![[NSUserDefaults standardUserDefaults] integerForKey:@"Alignment"]) {
+        alignmentVar = 1;
+        [self fillTableViewArray];
+    }else {
+        alignmentVar = [[NSUserDefaults standardUserDefaults] integerForKey:@"Alignment"];
+        [self fillTableViewArray];
+    }
 }
 
 -(id)initWithCoder:(NSCoder *)aDecoder
@@ -67,6 +76,33 @@
     return self;
 }
 
+#pragma mark SettingsDelegate
+-(void)getAlignmentVar:(int)integer
+{
+    alignmentVar = integer;
+    [self fillTableViewArray];
+    [myQuestTableView reloadData];
+}
+
+-(void)fillTableViewArray
+{
+    tableviewArray = [[NSMutableArray alloc] initWithCapacity:10];
+    
+    for (Quest* quest in questArray) {
+        if (alignmentVar == 0) {
+            if ([quest.alignment isEqualToString:@"GOOD"]) {
+                [tableviewArray addObject:quest];
+            }}
+        if (alignmentVar == 1) {
+            [tableviewArray addObject:quest];
+        }
+        if (alignmentVar == 2) {
+            if ([quest.alignment isEqualToString:@"EVIL"]) {
+                [tableviewArray addObject:quest];
+            }}
+    }
+}
+
 - (int) numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
@@ -74,7 +110,7 @@
 
 - (int) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [questArray count];
+    return [tableviewArray count];
 }
 
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -87,7 +123,7 @@
     }
     cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
     
-    cell.textLabel.text = [[questArray objectAtIndex:indexPath.row] questName];
+    cell.textLabel.text = [[tableviewArray objectAtIndex:indexPath.row] questName];
     return cell;
 }
 
@@ -99,9 +135,20 @@
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    DetailViewController * detailVC = segue.destinationViewController;
-    
-    detailVC.detailInfo = [questArray objectAtIndex:tableRow];
+    if ([[segue identifier] isEqualToString:@"toDetailVC"])
+    {
+        DetailViewController * detailVC = segue.destinationViewController;
+        detailVC.detailInfo = [tableviewArray objectAtIndex:tableRow];
+    }
+    if ([[segue identifier] isEqualToString:@"toSettingsVC"])
+    {
+        SettingsViewController * settingsVC = segue.destinationViewController;
+        settingsVC.settingsDelegate = self;
+    }
+}
+
+- (IBAction)getSettings:(id)sender {
+    [self performSegueWithIdentifier:@"toSettingsVC" sender:self];
 }
 
 
@@ -121,5 +168,6 @@
  // Pass the selected object to the new view controller.
  }
  */
+
 
 @end

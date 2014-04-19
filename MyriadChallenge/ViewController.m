@@ -14,6 +14,7 @@
     __weak IBOutlet UITextField *textUsername;
     
     __weak IBOutlet UITextField *textPassword;
+    __weak IBOutlet UISwitch *rememberSwitch;
     
 }
 - (IBAction)logIn:(id)sender;
@@ -33,6 +34,8 @@
     UITapGestureRecognizer *tapDismiss = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapDismissKeyboard:)];
     [self.view addGestureRecognizer:tapDismiss];
     
+    textUsername.text = [[NSUserDefaults standardUserDefaults] stringForKey:@"Username"];
+    
 }
 
 -(void)tapDismissKeyboard:(UITapGestureRecognizer *)sender{
@@ -49,6 +52,12 @@
 
 - (IBAction)logIn:(id)sender {
     if ([textUsername.text isEqualToString:@"Lancelot"] && [textPassword.text isEqualToString:@"arthurDoesntKnow"]) {
+        if (rememberSwitch.on == YES) {
+            [[NSUserDefaults standardUserDefaults] setValue:textUsername.text forKey:@"Username"];
+            [[NSUserDefaults standardUserDefaults] synchronize]; //need this to work with simulator
+        } else if (rememberSwitch.on == NO){
+            [[NSUserDefaults standardUserDefaults] setValue:@"" forKey:@"Username"];
+        }
         [self performSegueWithIdentifier:@"toQuestVC" sender:self];
     } else {
         labelError.alpha = 1.0f;
