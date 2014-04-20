@@ -36,6 +36,7 @@
     
     textUsername.text = [[NSUserDefaults standardUserDefaults] stringForKey:@"Username"];
     
+    
 }
 
 -(void)tapDismissKeyboard:(UITapGestureRecognizer *)sender{

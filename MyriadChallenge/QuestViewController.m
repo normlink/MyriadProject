@@ -56,6 +56,10 @@
         banditsWoods.location = @"(46.908588, -96.808991)";
         banditsWoods.questGiver = @"HotDogg The Bounty Hunter";
         banditsWoods.questGiverLocation = @"(46.8541979, -96.8285138)";
+        banditsWoods.locationLatitude = @"46.908588";
+        banditsWoods.locationLongitude = @"-96.808991";
+        banditsWoods.questGiverLatitude = @"46.8541979";
+        banditsWoods.questGiverLongitude = @"-96.8285138";
         
         specialDelivery.questName = @"Special Delivery";
         specialDelivery.alignment = @"NEUTRAL";
@@ -63,6 +67,10 @@
         specialDelivery.location = @"(46.8657639, -96.7363173)";
         specialDelivery.questGiver = @"Sir Jimmy The Swift";
         specialDelivery.questGiverLocation = @"(46.8739748, -96.806112)";
+        specialDelivery.locationLatitude = @"46.8657639";
+        specialDelivery.locationLongitude = @"-96.7363173";
+        specialDelivery.questGiverLatitude = @"46.8739748";
+        specialDelivery.questGiverLongitude = @"-96.806112";
         
         filthyMongrel.questName = @"Filthy Mongrel";
         filthyMongrel.alignment = @"EVIL";
@@ -70,6 +78,10 @@
         filthyMongrel.location = @"(46.892386,-96.799669)";
         filthyMongrel.questGiver = @"Prince Jack, The Iron Horse";
         filthyMongrel.questGiverLocation = @"(46.8739748, -96.806112)";
+        filthyMongrel.locationLatitude = @"46.892386";
+        filthyMongrel.locationLongitude = @"-96.799669";
+        filthyMongrel.questGiverLatitude = @"46.8739748";
+        filthyMongrel.questGiverLongitude = @"-96.806112";
         
         questArray = [NSMutableArray arrayWithObjects:banditsWoods, specialDelivery, filthyMongrel, nil];
     }
@@ -81,7 +93,7 @@
 {
     alignmentVar = integer;
     [self fillTableViewArray];
-    [myQuestTableView reloadData];
+    
 }
 
 -(void)fillTableViewArray
@@ -101,6 +113,7 @@
                 [tableviewArray addObject:quest];
             }}
     }
+    [myQuestTableView reloadData];
 }
 
 - (int) numberOfSectionsInTableView:(UITableView *)tableView

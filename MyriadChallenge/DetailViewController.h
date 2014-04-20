@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Quest.h"
+#import <MapKit/MapKit.h>
 
 @interface DetailViewController : UIViewController
 

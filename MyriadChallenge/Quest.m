@@ -10,7 +10,7 @@
 
 @implementation Quest
 
-@synthesize questName, alignment, description, location, questGiver, questGiverLocation;
+@synthesize questName, alignment, description, location, questGiver, questGiverLocation,locationLatitude,locationLongitude,questGiverLatitude,questGiverLongitude;
 
 
 @end

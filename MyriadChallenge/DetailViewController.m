@@ -7,6 +7,7 @@
 //
 
 #import "DetailViewController.h"
+#import "MapAnnotations.h"
 
 @interface DetailViewController (){
     
@@ -16,23 +17,16 @@
     __weak IBOutlet UILabel *questGiverNameLabel;
     __weak IBOutlet UILabel *questGiverLocationLabel;
     __weak IBOutlet UILabel *questDescriptionLabel;
-    
+    __weak IBOutlet MKMapView *mapView;
+
 }
+- (IBAction)changeMapType:(id)sender;
 
 @end
 
 @implementation DetailViewController
 
 @synthesize detailInfo;
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
 - (void)viewDidLoad
 {
@@ -44,6 +38,37 @@
     questGiverNameLabel.text = [NSString stringWithFormat:@"%@", detailInfo.questGiver];
     questGiverLocationLabel.text = [NSString stringWithFormat:@"%@", detailInfo.questGiverLocation];
     questDescriptionLabel.text = [NSString stringWithFormat:@"%@", detailInfo.description];
+    
+    float questLatitude = detailInfo.locationLatitude.floatValue;
+    float questLongitude = detailInfo.locationLongitude.floatValue;
+    float giverLatitude = detailInfo.questGiverLatitude.floatValue;
+    float giverLongitude = detailInfo.questGiverLongitude.floatValue;
+    
+    MapAnnotations* questPin = [[MapAnnotations alloc] init];
+    questPin.coordinate = CLLocationCoordinate2DMake(questLatitude, questLongitude);
+    questPin.title = questNameLabel.text;
+    
+    MapAnnotations* giverPin = [[MapAnnotations alloc] init];
+    giverPin.coordinate = CLLocationCoordinate2DMake(giverLatitude, giverLongitude);
+    giverPin.title = questGiverNameLabel.text;
+    
+    NSArray* pinArray = [[NSArray alloc] initWithObjects:questPin,giverPin, nil];
+    
+    [mapView showAnnotations:pinArray animated:YES];
+}
+
+- (IBAction)changeMapType:(id)sender
+{
+    switch (((UISegmentedControl *) sender).selectedSegmentIndex){
+        case 0:
+            mapView.mapType = MKMapTypeStandard;
+            break;
+        case 1:
+            mapView.mapType = MKMapTypeSatellite;
+            break;
+        default:
+            break;
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -62,5 +87,6 @@
  // Pass the selected object to the new view controller.
  }
  */
+
 
 @end

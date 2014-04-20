@@ -16,5 +16,9 @@
 @property (strong, nonatomic) NSString *location;
 @property (strong, nonatomic) NSString *questGiver;
 @property (strong, nonatomic) NSString *questGiverLocation;
+@property (strong, nonatomic) NSString *locationLatitude;
+@property (strong, nonatomic) NSString *locationLongitude;
+@property (strong, nonatomic) NSString *questGiverLatitude;
+@property (strong, nonatomic) NSString *questGiverLongitude;
 
 @end
