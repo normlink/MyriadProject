@@ -9,9 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "Quest.h"
 #import <MapKit/MapKit.h>
+#import <Parse/Parse.h>
 
 @interface DetailViewController : UIViewController
 
-@property (strong, nonatomic) Quest * detailInfo;
+@property (strong, nonatomic) PFObject * detailInfo;
 
 @end
