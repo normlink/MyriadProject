@@ -117,7 +117,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="IVC-AR-aZr">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="109" width="320" height="459"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
@@ -125,8 +125,20 @@
                                     <outlet property="delegate" destination="vqY-bR-8A3" id="vaQ-z9-CTO"/>
                                 </connections>
                             </tableView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="mK4-zB-ZGO">
+                                <rect key="frame" x="20" y="73" width="280" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <segments>
+                                    <segment title="Available"/>
+                                    <segment title="Accepted"/>
+                                    <segment title="Complete"/>
+                                </segments>
+                                <connections>
+                                    <action selector="questStatusFilterView:" destination="vqY-bR-8A3" eventType="valueChanged" id="9NI-i9-ymL"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Quests" id="Ouh-sM-BAJ">
                         <barButtonItem key="rightBarButtonItem" title="Settings" id="nbE-7P-Gbi">
@@ -137,13 +149,14 @@
                     </navigationItem>
                     <connections>
                         <outlet property="myQuestTableView" destination="IVC-AR-aZr" id="hTi-jW-JkN"/>
+                        <outlet property="questStatusSegment" destination="mK4-zB-ZGO" id="e3o-1E-abK"/>
                         <segue destination="Lec-2p-NTt" kind="push" identifier="toDetailVC" id="JPg-JL-vFO"/>
                         <segue destination="uwN-Iy-ppX" kind="push" identifier="toSettingsVC" id="j1z-Hy-0uv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tqe-c6-8Uh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2054" y="622"/>
+            <point key="canvasLocation" x="2054" y="630"/>
         </scene>
         <!--Sign Up View Controller - Sign Up-->
         <scene sceneID="x7X-9e-JbS">
@@ -355,8 +368,15 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Detail" id="zPn-k6-y9c"/>
+                    <navigationItem key="navigationItem" title="Detail" id="zPn-k6-y9c">
+                        <barButtonItem key="rightBarButtonItem" title="Accept" width="300" id="4Jk-cz-E8C">
+                            <connections>
+                                <action selector="acceptQuest:" destination="Lec-2p-NTt" id="wzR-mD-Ccr"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="acceptButton" destination="4Jk-cz-E8C" id="pOQ-5B-Yvf"/>
                         <outlet property="mapView" destination="AaA-f6-gss" id="wyl-LW-Yb1"/>
                         <outlet property="questAlignmentLabel" destination="WRX-nQ-Q2G" id="TVg-lL-X6Q"/>
                         <outlet property="questDescriptionLabel" destination="gtt-dQ-3Fv" id="MEa-ts-N6a"/>

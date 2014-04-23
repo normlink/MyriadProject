@@ -11,6 +11,7 @@
 
 @interface DetailViewController (){
     
+    __weak IBOutlet UIBarButtonItem *acceptButton;
     __weak IBOutlet UILabel *questNameLabel;
     __weak IBOutlet UILabel *questAlignmentLabel;
     __weak IBOutlet UILabel *questLocationLabel;
@@ -19,9 +20,10 @@
     __weak IBOutlet UILabel *questDescriptionLabel;
     __weak IBOutlet MKMapView *mapView;
     PFGeoPoint * locationGeoPoint;
-
+    PFGeoPoint * questGiverGeoPoint;
 }
 - (IBAction)changeMapType:(id)sender;
+- (IBAction)acceptQuest:(id)sender;
 
 @end
 
@@ -32,76 +34,67 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    [self doParseQuery];
     
-//    questNameLabel.text = [NSString stringWithFormat:@"%@", detailInfo.questName];
-//    questAlignmentLabel.text = [NSString stringWithFormat:@"%@", detailInfo.alignment];
-//    questLocationLabel.text = [NSString stringWithFormat:@"%@", detailInfo.location];
-//    questGiverNameLabel.text = [NSString stringWithFormat:@"%@", detailInfo.questGiver];
-//    questGiverLocationLabel.text = [NSString stringWithFormat:@"%@", detailInfo.questGiverLocation];
-//    questDescriptionLabel.text = [NSString stringWithFormat:@"%@", detailInfo.description];
-//    
-//    float questLatitude = detailInfo.locationLatitude.floatValue;
-//    float questLongitude = detailInfo.locationLongitude.floatValue;
-//    float giverLatitude = detailInfo.questGiverLatitude.floatValue;
-//    float giverLongitude = detailInfo.questGiverLongitude.floatValue;
-//    
-//    MapAnnotations* questPin = [[MapAnnotations alloc] init];
-//    questPin.coordinate = CLLocationCoordinate2DMake(questLatitude, questLongitude);
-//    questPin.title = questNameLabel.text;
-//    
-//    MapAnnotations* giverPin = [[MapAnnotations alloc] init];
-//    giverPin.coordinate = CLLocationCoordinate2DMake(giverLatitude, giverLongitude);
-//    giverPin.title = questGiverNameLabel.text;
-//    
-//    NSArray* pinArray = [[NSArray alloc] initWithObjects:questPin,giverPin, nil];
-//    
-//    [mapView showAnnotations:pinArray animated:YES];
+    [self doParseQuery];
 }
 
 -(void) doParseQuery{
     PFQuery *query = [PFQuery queryWithClassName:@"Quests"];
     [query whereKey:@"name" equalTo:[detailInfo objectForKey:@"name"]];
-//    [query includeKey:@"questGiver"];
-//    [query whereKey:@"questGiver" equalTo:User];
+    [query includeKey:@"questGiver"];
+    [query includeKey:@"acceptedBy"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             for (PFObject *object in objects) {
-              
+                
                 questNameLabel.text = object[@"name"];
                 [self getAlignmentString:object];
                 locationGeoPoint = object[@"location"];
                 questLocationLabel.text = [NSString stringWithFormat:@"(%f, %f)", locationGeoPoint.latitude,locationGeoPoint.longitude];
-//                questGiverNameLabel.text = object[@"questGiver.name"];
-                questGiverNameLabel.text = object[@"questgiver.name"];
-//                    questGiverLocationLabel.text = [NSString stringWithFormat:@"(%f, %f)", questGiverGeoPoint.latitude,questGiverGeoPoint.longitude];
-                    questDescriptionLabel.text = object[@"description"];
+                questGiverNameLabel.text = [object objectForKey:@"questGiver"][@"name" ];
+                questGiverGeoPoint = [object objectForKey:@"questGiver"][@"location" ];
+                questGiverLocationLabel.text = [NSString stringWithFormat:@"(%f, %f)", questGiverGeoPoint.latitude,questGiverGeoPoint.longitude];
+                questDescriptionLabel.text = object[@"description"];
+                
+                [self setMapview];
+                
+                if ([object objectForKey:@"acceptedBy"][@"username"]){
+                    acceptButton.title = @"Complete";
+                }
             }
- 
         } else {
             NSString *errorString = [[error userInfo] objectForKey:@"error"];
             NSLog(@"Error: %@", errorString);
         }
-         NSLog(@"geopoint %@",locationGeoPoint);
     }];
-    
-   
 }
+
 -(void)getAlignmentString:(PFObject*)object
 {
-    
-
-            if ([object[@"alignment"] isEqual:@0]) {
-                questAlignmentLabel.text = @"GOOD";
-            }
+    if ([object[@"alignment"] isEqual:@0]) {
+        questAlignmentLabel.text = @"GOOD";
+    }
     if ([object[@"alignment"] isEqual:@1]) {
         questAlignmentLabel.text = @"NEUTRAL";
     }
     if ([object[@"alignment"] isEqual:@2]) {
         questAlignmentLabel.text = @"EVIL";
     }
+}
+
+-(void)setMapview
+{
+    MapAnnotations* questPin = [[MapAnnotations alloc] init];
+    questPin.coordinate = CLLocationCoordinate2DMake(locationGeoPoint.latitude, locationGeoPoint.longitude);
+    questPin.title = questNameLabel.text;
     
+    MapAnnotations* giverPin = [[MapAnnotations alloc] init];
+    giverPin.coordinate = CLLocationCoordinate2DMake(questGiverGeoPoint.latitude, questGiverGeoPoint.longitude);
+    giverPin.title = questGiverNameLabel.text;
+    
+    NSArray* pinArray = [[NSArray alloc] initWithObjects:questPin,giverPin, nil];
+    
+    [mapView showAnnotations:pinArray animated:YES];
 }
 
 - (IBAction)changeMapType:(id)sender
@@ -115,6 +108,22 @@
             break;
         default:
             break;
+    }
+}
+
+- (IBAction)acceptQuest:(id)sender
+{
+    if ([acceptButton.title  isEqual: @"Accept"]) {
+        PFObject *accept = [PFObject objectWithClassName:@"Quests"];
+        
+        //The following line is not working; for sure left part is not properly accessing
+        [accept objectForKey:@"acceptedBy"][@"username"] = [[PFUser currentUser] objectForKey:@"username"];
+        [accept saveInBackground];
+        acceptButton.title = @"Complete";
+    } else if ([acceptButton.title  isEqual: @"Complete"]) {
+        PFObject *complete = [PFObject objectWithClassName:@"Quests"];
+        [complete setObject:[NSNumber numberWithBool:TRUE] forKey:@"completed"];
+        [complete saveInBackground];
     }
 }
 

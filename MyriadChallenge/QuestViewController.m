@@ -14,10 +14,8 @@
 @interface QuestViewController ()
 {
     
+    __weak IBOutlet UISegmentedControl *questStatusSegment;
     __weak IBOutlet UITableView *myQuestTableView;
-    Quest * banditsWoods;
-    Quest * specialDelivery;
-    Quest * filthyMongrel;
     NSMutableArray * questArray;
     NSMutableArray * tableviewArray;
     NSMutableArray * testArray;
@@ -25,6 +23,7 @@
     int alignmentVar;
 }
 - (IBAction)getSettings:(id)sender;
+- (IBAction)questStatusFilterView:(id)sender;
 
 @end
 
@@ -47,19 +46,30 @@
 
 -(void) doParseQuery{
     PFQuery *query = [PFQuery queryWithClassName:@"Quests"];
+    [query includeKey:@"acceptedBy"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             
             questArray = [[NSMutableArray alloc] initWithArray:objects];
             
+            for (PFObject *object in objects) {
+                if ((questStatusSegment.selectedSegmentIndex == 0) && ([object objectForKey:@"acceptedBy"][@"username"])){
+                    [questArray removeObject:object];
+                }
+                if ((questStatusSegment.selectedSegmentIndex == 1) && !([object objectForKey:@"acceptedBy"][@"username"])){
+                    [questArray removeObject:object];
+                }
+                if ((questStatusSegment.selectedSegmentIndex == 2) && ([object [@"completed"]  isEqual: @FALSE])){
+                    [questArray removeObject:object];
+                }}
         } else {
             NSString *errorString = [[error userInfo] objectForKey:@"error"];
             NSLog(@"Error: %@", errorString);
         }
         
-//        for (PFObject *object in questArray) {
-//            NSLog(@"%@",[object objectForKey:@"name"]);
-//        }
+        //        for (PFObject *object in questArray) {
+        //            NSLog(@"%@",[object objectForKey:@"name"]);
+        //        }
         [self fillTableViewArray];
     }];
 }
@@ -70,6 +80,10 @@
     alignmentVar = integer;
     [self fillTableViewArray];
     
+}
+- (IBAction)questStatusFilterView:(id)sender
+{
+    [self doParseQuery];
 }
 
 -(void)fillTableViewArray
@@ -143,7 +157,6 @@
 - (IBAction)getSettings:(id)sender {
     [self performSegueWithIdentifier:@"toSettingsVC" sender:self];
 }
-
 
 - (void)didReceiveMemoryWarning
 {
